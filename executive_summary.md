@@ -1,37 +1,32 @@
+# BikePulse Taipei: Real-time YouBike Supply-Demand Dashboard
+
 ## Live Dashboard URL
 
 https://bikepulse-taipei-n7jxuvpveahv69pylhqtnk.streamlit.app
 
-# BikePulse Taipei: Real-time YouBike Supply-Demand Dashboard
+## GitHub Repository
+
+https://github.com/linboxuan0715-art/bikepulse-taipei
 
 ## 1. Project Overview
 
-BikePulse Taipei is a real-time dashboard designed to monitor YouBike station availability across Taipei. The project uses public YouBike open data to analyze station-level supply and demand conditions, identify bike shortages, and detect docking shortages.
+BikePulse Taipei is a real-time dashboard designed to monitor YouBike station availability across Taipei. The project uses Taipei YouBike 2.0 open data to analyze station-level supply and demand conditions, identify bike shortages, and detect docking shortages.
 
-The goal of this project is to transform real-time transportation data into an interactive dashboard that supports quick understanding of urban bike-sharing imbalance.
+The goal of this project is to transform real-time transportation data into an interactive dashboard that helps users and operators quickly understand where bike-sharing imbalance occurs across the city.
 
 ## 2. Data Source
 
 The dashboard uses Taipei YouBike 2.0 real-time open data in JSON format.
 
-The dataset contains station-level information, including:
-
-- Station name
-- District
-- Address
-- Total parking slots
-- Available bikes
-- Available docks
-- Latitude and longitude
-- Data update time
+The dataset contains station-level information, including station name, district, address, total parking slots, available bikes, available docks, latitude, longitude, and data update time.
 
 ## 3. Data Pipeline
 
-The project follows an ETL data pipeline:
+The project follows an ETL data pipeline.
 
 ### Extract
 
-The system fetches real-time station data from the public YouBike API using Python `requests`.
+The system fetches real-time station-level data from the public YouBike API using Python `requests`.
 
 ### Transform
 
@@ -59,11 +54,11 @@ Shows system-level KPIs such as active stations, available bikes, available dock
 
 ### District Comparison
 
-Compares YouBike supply-demand conditions across Taipei districts using bar charts and scatter plots.
+Compares YouBike supply-demand conditions across Taipei districts using bar charts and a scatter plot.
 
 ### Problem Stations
 
-Ranks stations with the lowest bike availability and lowest dock availability, helping identify locations that may require rebalancing.
+Ranks stations with the lowest bike availability and lowest dock availability, helping identify locations that may require bike redistribution or docking-space relief.
 
 ### Map
 
@@ -75,3 +70,27 @@ The dashboard uses Streamlit cache with a 5-minute time-to-live setting:
 
 ```python
 @st.cache_data(ttl=300)
+```
+
+This allows the dashboard to automatically refresh real-time data every five minutes. A manual refresh button is also provided in the sidebar.
+
+## 6. Key Insights
+
+This dashboard highlights two different types of operational imbalance in the YouBike system:
+
+1. Low bike availability means users may have difficulty renting bikes.
+2. Low dock availability means users may have difficulty returning bikes.
+
+By separating these two indicators, the dashboard provides a clearer view of supply-demand imbalance and can support better real-time bike redistribution decisions.
+
+## 7. Tools Used
+
+- Python
+- Streamlit
+- pandas
+- requests
+- Plotly
+
+## 8. Project Value
+
+BikePulse Taipei demonstrates how public open data can be transformed into a practical decision-support dashboard. Instead of only showing raw station-level data, the project turns real-time information into actionable indicators for users, city operators, and transportation planners.
